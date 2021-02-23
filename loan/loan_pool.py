@@ -24,7 +24,7 @@ class Loan_pool:
     @property
     def max_term(self):
         return max(loan._term for loan in self._loan_list)
-    
+
     def append(self, loan: Loan):
         if self._loan_list == None:
             self._loan_list = []
@@ -59,6 +59,7 @@ class Loan_pool:
             interest_due_t = 0
             principal_due_t = 0
             balance_t = 0
+
             for loan in self._loan_list:
                 default_amount_i = 0
                 prepaid_amount_i = 0
@@ -66,8 +67,10 @@ class Loan_pool:
                 principal_due_t += loan.principal_due(period)
                 if loan._defaulted:
                     continue
+
                 payment_t = loan.equal_pmt_amt(period)
                 cash_flow_i = payment_t
+
                 # check default:
                 if np.random.rand() < loan.default_rate:
                     cash_flow_i += loan.balance(period) * recovery_rate
@@ -75,11 +78,13 @@ class Loan_pool:
                     interest_due_t -= loan.interest_due(period) * (1 - recovery_rate)
                     principal_due_t -= loan.principal_due(period) * (1 - recovery_rate)
                     loan._defaulted = True
+
                 # check prepayment
                 elif np.random.rand() < prepayment_rate.rate():
                     cash_flow_i += loan.balance(period) + payment_t
                     prepaid_amount_i = loan.balance(period) + payment_t
                     loan._defaulted = True
+
                 cash_flow_t += cash_flow_i
                 default_amount_t += default_amount_i
                 prepaid_amount_t += prepaid_amount_i

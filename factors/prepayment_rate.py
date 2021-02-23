@@ -21,6 +21,7 @@ class prepayment_rate:
     def SMM(self):
         return self.to_SMM(self._CPR)
 
+    # temporary fixed return
     @staticmethod
     def rate():
         return 0.00002
