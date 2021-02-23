@@ -16,9 +16,15 @@ Main structure
   * add loan
   * get waterfall
   
-    
+###Class: factors
 * Class: factors
     * prepayment_rate: assume fixed
     * default_rate: assume fixed
-    
+    * assume recovery rate = 0.4 and recovery happen immidiately
+  
+  
+###Class: test_classes
+* Class: test_loan()
+
+
 
